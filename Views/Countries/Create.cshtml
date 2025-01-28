@@ -1,0 +1,71 @@
+﻿ @* Create.cshtml / Edit.cshtml *@
+@model Country
+
+<div class="container-fluid mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h2>@(Model?.Id > 0 ? "Edit" : "Create") Country</h2>
+        </div>
+        <div class="card-body">
+            <form asp-action="@(Model?.Id > 0 ? "Edit" : "Create")" method="post">
+                @if (Model?.Id > 0)
+                {
+                    <input type="hidden" asp-for="Id" />
+                }
+                
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label">Country Name</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="CapitalCity" class="form-label">Capital City</label>
+                    <select asp-for="CapitalCity" class="form-select"
+                            asp-items="@(new SelectList(ViewBag.Cities, "Id", "Name"))">
+                        <option value="">-- Select a Capital City --</option>
+                    </select>
+                    <span asp-validation-for="CapitalCity" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Population" class="form-label">Population</label>
+                    <input asp-for="Population" class="form-control" />
+                    <span asp-validation-for="Population" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="SizeInSquareMeters" class="form-label">Size (m²)</label>
+                    <input asp-for="SizeInSquareMeters" class="form-control" />
+                    <span asp-validation-for="SizeInSquareMeters" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="IndependenceYear" class="form-label">Independence Year</label>
+                    <input asp-for="IndependenceYear" class="form-control" />
+                    <span asp-validation-for="IndependenceYear" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Language" class="form-label">Primary Language</label>
+                    <input asp-for="Language" class="form-control" />
+                    <span asp-validation-for="Language" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Currency" class="form-label">Currency</label>
+                    <input asp-for="Currency" class="form-control" />
+                    <span asp-validation-for="Currency" class="text-danger"></span>
+                </div>
+
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+ 
