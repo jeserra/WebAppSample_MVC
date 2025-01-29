@@ -9,4 +9,6 @@ public interface ICountryRepository
     Country? GetCountry(int id);
     void UpdateCountry (Country country);
 
+    bool Delete(int countryId);
+
 }

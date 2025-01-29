@@ -92,4 +92,15 @@ public class CountryRepository : ICountryRepository
             existingCountry.Currency = country.Currency;
         }
     }
+
+    public bool Delete(int countryId)
+    {
+        var countryToDelete = _countries.Where(x=> x.Id == countryId).FirstOrDefault();
+        if(countryToDelete != null) 
+        {
+            _countries.Remove(countryToDelete);
+            return true;
+        }
+        return false;
+    }
 }

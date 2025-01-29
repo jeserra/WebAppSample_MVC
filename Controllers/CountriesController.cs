@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Specialized;
 using WebAppSample.Models;
 using WebAppSample.Repos;
 
@@ -48,7 +49,8 @@ public class CountriesController : Controller
     [HttpGet]
     public IActionResult Edit(int id)
     {
-        return View("Create", _countryRepository.GetCountry(id));
+        var country = _countryRepository.GetCountry(id);
+        return View(country);
     }
 
     [HttpPost]
@@ -60,6 +62,13 @@ public class CountriesController : Controller
             return RedirectToAction("Index");
         }
         else 
-            return View("Create", country);
+            return View("Edit", country);
+    }
+
+    [HttpDelete]
+    public IActionResult Delete(int id) 
+    {
+         var result = _countryRepository.Delete(id);
+        return Json(new { success = result });
     }
 }
