@@ -1,0 +1,58 @@
+{
+  "countries": [
+    {
+      "id": 1,
+      "name": "United States",
+      "population": 331002651,
+      "sizeInSquareMeters": 9833517,
+      "independenceYear": 1776,
+      "language": "English",
+      "currency": "USD"
+    },
+    {
+      "id": 2,
+      "name": "France",
+      "population": 67391582,
+      "sizeInSquareMeters": 551695,
+      "independenceYear": 486,
+      "language": "French",
+      "currency": "EUR"
+    },
+    {
+      "id": 3,
+      "name": "Japan",
+      "population": 125836021,
+      "sizeInSquareMeters": 377975,
+      "independenceYear": null,
+      "language": "Japanese",
+      "currency": "JPY"
+    },
+    {
+      "id": 4,
+      "name": "Brazil",
+      "population": 212559417,
+      "sizeInSquareMeters": 8515770,
+      "independenceYear": 1822,
+      "language": "Portuguese",
+      "currency": "BRL"
+    },
+    {
+      "id": 5,
+      "name": "Australia",
+      "population": 25499884,
+      "sizeInSquareMeters": 7692024,
+      "independenceYear": 1901,
+      "language": "English",
+      "currency": "AUD"
+    },
+    {
+      "id": 6,
+      "name": "New Zeland",
+      "population": 25499884,
+      "sizeInSquareMeters": 7692024,
+      "independenceYear": 1901,
+      "language": "English",
+      "currency": "AUD"
+    }
+  ]
+}

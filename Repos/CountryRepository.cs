@@ -1,7 +1,13 @@
-﻿using WebAppSample.Models;
+﻿using Microsoft.AspNetCore.Hosting;
+using System.Text.Json;
+using WebAppSample.Models;
 
 namespace WebAppSample.Repos;
- 
+
+public class CountriesData
+{
+    public List<Country> Countries { get; set; }
+}
 
 public class CountryRepository : ICountryRepository
 {
@@ -9,59 +15,17 @@ public class CountryRepository : ICountryRepository
 
     public CountryRepository()
     {
-        _countries = new List<Country>
+        var jsonPath = Path.Combine(@"C:\\Users\\joser\\source\\repos\\WebAppSample\\wwwroot\\", "data", "countries.json");
+        var jsonText = System.IO.File.ReadAllText(jsonPath);
+        var options = new JsonSerializerOptions
         {
-            new Country
-            {
-                Id = 1,
-                Name = "United States",
-                Population = 331002651,
-                SizeInSquareMeters = 9833517,
-                IndependenceYear = 1776,
-                Language = "English",
-                Currency = "USD"
-            },
-            new Country
-            {
-                Id = 2,
-                Name = "France",
-                Population = 67391582,
-                SizeInSquareMeters = 551695,
-                IndependenceYear = 486,
-                Language = "French",
-                Currency = "EUR"
-            },
-            new Country
-            {
-                Id = 3,
-                Name = "Japan",
-                Population = 125836021,
-                SizeInSquareMeters = 377975,
-                IndependenceYear = null,
-                Language = "Japanese",
-                Currency = "JPY"
-            },
-            new Country
-            {
-                Id = 4,
-                Name = "Brazil",
-                Population = 212559417,
-                SizeInSquareMeters = 8515770,
-                IndependenceYear = 1822,
-                Language = "Portuguese",
-                Currency = "BRL"
-            },
-            new Country
-            {
-                Id = 5,
-                Name = "Australia",
-                Population = 25499884,
-                SizeInSquareMeters = 7692024,
-                IndependenceYear = 1901,
-                Language = "English",
-                Currency = "AUD"
-            }
+            PropertyNameCaseInsensitive = true // This allows case-insensitive property matching
         };
+
+        var jsonData = JsonSerializer.Deserialize<JsonDocument>(jsonText);
+        var countriesArray = jsonData.RootElement.GetProperty("countries");
+        _countries = JsonSerializer.Deserialize<List<Country>>(countriesArray.GetRawText(), options);
+
     }
 
     public IEnumerable<Country> GetAllCountries()
